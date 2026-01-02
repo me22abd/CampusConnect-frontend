@@ -46,17 +46,31 @@ frontend/
 
 ## API Configuration
 
-Update `src/services/api.ts` with your backend URL:
+### Production
 
-```typescript
-const API_BASE_URL = __DEV__
-  ? 'http://localhost:3000/api'  // Local development
-  : 'https://your-backend-url.com/api';  // Production
+Set the `EXPO_PUBLIC_API_URL` environment variable:
+
+```bash
+# In your .env file (see .env.example)
+EXPO_PUBLIC_API_URL=https://campusconnect-production-0aed.up.railway.app/api
 ```
 
-**Note:** For iOS simulator, use `http://localhost:3000`
-**Note:** For Android emulator, use `http://10.0.2.2:3000`
-**Note:** For physical device, use your computer's IP address
+Or set it when running Expo:
+```bash
+EXPO_PUBLIC_API_URL=https://campusconnect-production-0aed.up.railway.app/api expo start
+```
+
+### Development
+
+The app automatically uses:
+- iOS Simulator: `http://localhost:3000/api`
+- Android Emulator: `http://10.0.2.2:3000/api`
+- Physical Device: Use your computer's IP address
+
+**Note:** 
+- Environment variables must be prefixed with `EXPO_PUBLIC_` to be accessible
+- Never commit `.env` files (they're in `.gitignore`)
+- Copy `.env.example` to `.env` and set your production URL
 
 ## Navigation
 

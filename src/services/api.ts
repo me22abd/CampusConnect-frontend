@@ -21,15 +21,14 @@ import { Platform } from 'react-native';
  * - Windows: ipconfig
  */
 const getApiBaseUrl = () => {
-  // Production: Use environment variable or fallback
+  // Production: Use environment variable (required)
   if (!__DEV__) {
-    // Check for Expo environment variable first
     const prodUrl = process.env.EXPO_PUBLIC_API_URL;
-    if (prodUrl) {
-      return prodUrl;
+    if (!prodUrl) {
+      console.error('EXPO_PUBLIC_API_URL is required in production');
+      throw new Error('EXPO_PUBLIC_API_URL environment variable is not set');
     }
-    // Fallback: Update this with your production backend URL
-    return 'https://your-backend-url.com/api';
+    return prodUrl;
   }
 
   // Development - adjust based on platform
